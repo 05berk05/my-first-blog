@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User #3
 
 
 class Post(models.Model):
@@ -16,3 +17,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+#buradan sonrası login için 
+class UserProfileInfo(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    portfolio_site = models.URLField(blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
+    
+    def __str__(self):
+        return self.user.username

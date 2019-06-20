@@ -1,14 +1,20 @@
 h2 a {
-    color: #C25100;
+    color: rgb(255, 255, 255);
     font-family: 'Lobster';
 }
 h1 a {
     color: rgb(0, 194, 10);
     font-family: 'Lobster';
+        color: rgb(219, 209, 202);
 }
+
 body {
     padding-left: 15px;
     padding-top: 10px;
+    background: url("images/wallpaper.gif.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 } 
 .page-header {
     background-color: #C25100;
@@ -23,12 +29,15 @@ body {
 }
 
 .content {
-    background-color: rgb(3, 0, 194);
-    margin-left: 40px; 
-    color: hsl(0, 33%, 90%);
-}
+    /* background-color: rgb(3, 0, 194); */
+    /* margin-left: 40px;  */
+    background-color: black;
+    color: hsl(0, 0%, 100%);
+    font-size: 14pt;
+    font-style: italic;
+ } 
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h6 {
     font-family: 'Lobster', cursive;
 }
 
@@ -56,5 +65,22 @@ h1, h2, h3, h4 {
 }
 
 .post h2 a, .post h2 a:visited {
-    color: #bd2d2d;
+    color: #e07a1a;
 }
+
+.login-header h6 {
+    color: #C25100;
+}
+.login2 {
+    color: rgb(194, 0, 0);
+}
+
+h6 {
+    color: rgb(194, 0, 0);
+    font-size: 20pt;
+}
+h7 a{
+    color: rgb(0, 0, 0);
+    font-size: 10pt;
+}
+

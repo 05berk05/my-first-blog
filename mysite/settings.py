@@ -14,6 +14,9 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# TEMPLATE_DIR = os.path.join(BASE_DIR,'templates') #3
+# STATIC_DIR = os.path.join(BASE_DIR,'static')#3
+# MEDIA_DIR = os.path.join(BASE_DIR,'media')#3
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'blog.apps.BlogConfig', #new
     'blog',
+    #'dappx'#3
 ]
 
 MIDDLEWARE = [
@@ -55,7 +60,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], #login için ekledik
+        #'DIRS': [TEMPLATE_DIR,], #login için ekledik
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -120,4 +127,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [STATIC_DIR,]#3
 STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), 'static').replace('\\','/'),)
+# MEDIA_ROOT = MEDIA_DIR#3
+# MEDIA_URL = "/media/"#3
+LOGIN_URL = '/'#3
+LOGIN_REDIRECT_URL = 'post_list'
+LOGOUT_REDIRECT_URL = 'post_list'
+
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
