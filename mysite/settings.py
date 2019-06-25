@@ -147,5 +147,5 @@ LOGOUT_REDIRECT_URL = '/'
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 #for heroku
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
