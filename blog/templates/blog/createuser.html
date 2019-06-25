@@ -1,3 +1,4 @@
+{% extends 'blog/base.html' %}
 {% load static %}
 <html>
     <head>
@@ -8,11 +9,13 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-            <form action="{% url 'createuserview'  %}" method="post">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                <button type="submit">gönder</button>
-            </form>
+            {% block content %}
+                <form action="{% url 'createuserview'  %}" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                    <button style="-webkit-appearance: none" type="submit" class="CreateButton">Submit</button>
+                </form>
+            {% endblock %}
             
     </body>
 </html>

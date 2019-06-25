@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'blog.apps.BlogConfig', #new
-    'blog',
+    'blog.apps.BlogConfig', #new
+    #'blog',
     #'dappx'#3
 ]
 
@@ -129,11 +129,15 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATICFILES_DIRS = [STATIC_DIR,]#3
 STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), 'static').replace('\\','/'),)
-# MEDIA_ROOT = MEDIA_DIR#3
-# MEDIA_URL = "/media/"#3
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/'#3
-LOGIN_REDIRECT_URL = 'post_list'
-LOGOUT_REDIRECT_URL = 'post_list'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# setTimeout(function() {
+#   location.reload();
+# }, 30000);
 
 # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

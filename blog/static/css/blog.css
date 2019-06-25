@@ -7,34 +7,37 @@ h1 a {
     font-family: 'Lobster';
         color: rgb(219, 209, 202);
 }
+h3 a {
+    color: rgb(255, 255, 255);
+    font-family: 'Lobster';
+    font-size: 30px;
+    position: absolute;
+    top: 45px; right: 30px;
+}
 
 body {
-    padding-left: 15px;
-    padding-top: 10px;
     background: url("images/wallpaper.gif.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 } 
 .page-header {
-    background-color: #C25100;
+    /* background-color: rgb(14, 0, 36); */
     margin-top: 0;
-    padding: 20px 20px 20px 40px;
+    padding: 0px 0px 0px 0px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 36pt;
+    color: #000000;
+    font-size: 55pt;
     text-decoration: none;
+    text-shadow: 1px -2px black;
+    padding-left: 20px;
 }
 
 .content {
-    /* background-color: rgb(3, 0, 194); */
-    /* margin-left: 40px;  */
-    background-color: black;
+    background-color: rgb(15, 0, 51);
     color: hsl(0, 0%, 100%);
-    font-size: 14pt;
-    font-style: italic;
  } 
 
 h1, h2, h3, h4, h6 {
@@ -84,3 +87,49 @@ h7 a{
     font-size: 10pt;
 }
 
+.btn button {
+    color: #ffffff;
+    position: absolute;
+    top: 5;
+    left: 10px;
+    background: #0f0355
+}
+
+button {
+    color: #ffffff;
+    background: #0f0355
+}
+
+h5{
+    margin-block-start: 1.67em;
+    margin-block-end: 1.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p a{
+    position: relative;
+    left: 1300px;
+    color: #ffffff;
+}
+
+p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+form {
+    text-decoration-color: #1eaca5;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    background-color: #3880df;
+    color: darkblue;
+}
+
+textarea {
+    background-color: #3880df;
+    height: auto;
+}

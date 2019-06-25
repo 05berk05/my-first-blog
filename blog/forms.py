@@ -8,8 +8,8 @@ from .models import Post
 from django.contrib.auth.models import User
 
 class PostForm(forms.ModelForm):
-
-    class Meta:
+    title = forms.CharField(widget=forms.TextInput(attrs={'size': 10, 'title': 'Your name', "background-color": "red"}))
+    class Meta():
         model = Post
         fields = ('title', 'text',)
 
@@ -18,6 +18,8 @@ class UserForm(forms.ModelForm):
     class Meta():
         model = User
         fields = ('username','first_name','last_name','password','email')
+
+
 # class UserProfileInfoForm(forms.ModelForm):
 #      class Meta():
 #          model = UserProfileInfo

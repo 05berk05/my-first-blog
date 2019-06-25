@@ -5,6 +5,8 @@ from .models import Post
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm,UserForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+from django.db import models
 
 
 # from django.contrib.auth import authenticate, login, logout
@@ -62,20 +64,23 @@ def post_edit(request, pk):
 
 def hello(request):
     return render(request, 'blog/hello.html', {'hellos': "bloğuma hoş geldin"})
+def test(request):
+    return render(request, 'blog/test.html', {'test': "dear theodasia"})
 
 def post_delete(request,pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        print(request.method)
-        form = PostForm(request.POST)
-        post.delete()
-        if form.is_valid():
-            messages.success(request, "you have successfully deleted the post {{ post.title }}") #nasıl pk atanır sor, hangi post yani
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    posts = Post.objects.all().order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts}) #bu sırasıyla request template context oluyor
+    #if request.method == "POST":
+        # print(request.method)
+        # form = PostForm(request.POST)
+    post.delete()
+    return redirect("post_list") 
+        # if form.is_valid():
+        #     messages.success(request, "you have successfully deleted the post {{ post.title }}") #nasıl pk atanır sor, hangi post yani
+    #return render(request, 'blog/delete.html', {'post': post})
+    # else:
+    #     form = PostForm(instance=post)
+    # posts = Post.objects.all().order_by('published_date')
+    # return render(request, 'blog/post_list.html', {'posts': posts}) #bu sırasıyla request template context oluyor
 
 # class RequestDeleteView(MessageMixin, DeleteView):
 #     """
@@ -175,4 +180,15 @@ class BlogListView(LoginRequiredMixin,ListView):
         queryset = queryset.filter(  author =self.request.user)
         print(list(queryset))
         return queryset
+
+# def home(request):
+#     return render(request, 'blog/home.html', {'home': "dear theodasia"})
+class Home(ListView):
+    model = Post
+    template_name = 'blog/home.html'
+    new_image =  models.ImageField(upload_to='images/', default= "SOME IMAGE")
+
+
+
+
 
