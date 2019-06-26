@@ -60,13 +60,12 @@
     <body>
             <div class="page-header">
                     {% if user.is_authenticated %}
-                    <h1><a href="{% url 'post_list' %}">My Blog</a></h1>
                     <div class="col s12 m12" >
                     <h3><a href="{% url 'home' %}"style="margin-top: 30px">Home</a></h3>
                     <h3><a class="Logout" href="{% url 'logout' %}" style="margin-top: 60px">logout</a></h3>
-                    <h1><a href="/">{{ user.username }}'s Blog</a></h1>
+                    <h1><a href="{% url 'post_list' %}">{{user.username}}</a></h1>
                     {% else %}
-                    <h1><a href="/">Melis's Blog</a></h1>
+                    <h1><a href="{% url 'post_list' %}">My Blog</a></h1>
                     <h3><a href="{% url 'home' %}">Home</a></h3>
                     <h3><a class="Logout" href="{% url 'login' %}" style="margin-top: 30px">login</a></h3>
                     </div>
