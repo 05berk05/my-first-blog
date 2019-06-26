@@ -82,12 +82,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangogirls',
-        'USER': 'name',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -128,6 +124,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+# db_from_env = dj_database_url.config(conn_max_age=600)
+
+# DATABASES = {}
+# DATABASES['default'] =  dj_database_url.config(default='postgres://
+#                                                         user:pass@host/db')
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+# DATABASES['default'].update(db_from_env)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -147,5 +150,24 @@ LOGOUT_REDIRECT_URL = '/'
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 #for heroku
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# try:
+#     connection = psycopg2.connect(user = "sysadmin",
+#                                   password = "pynative@#29",
+#                                   host = "127.0.0.1",
+#                                   port = "5432",
+#                                   database = "postgres_db")
+#     cursor = connection.cursor()
+#     # Print PostgreSQL Connection properties
+#     print ( connection.get_dsn_parameters(),"\n")
+#     # Print PostgreSQL version
+#     cursor.execute("SELECT version();")
+#     record = cursor.fetchone()
+#     print("You are connected to - ", record,"\n")
+# except (Exception, psycopg2.Error) as error :
+#     print ("Error while connecting to PostgreSQL", error)
+# finally:
+#     #closing database connection.
+#         if(connection):
+#             cursor.close()
+#             connection.close()
+#             print("PostgreSQL connection is closed")
