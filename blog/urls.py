@@ -11,7 +11,7 @@ urlpatterns = [
     #path('', TemplateView.as_view(template_name='home.html'), name='home'), #new
     #path('',views.home, name='home'),
     path('', Home.as_view(), name='home'),
-    path('posts/', views.post_list, name='post_list'),
+    path('posts/', PostList.as_view(), name='post_list'),
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
     path('post/new/', views.post_new, name='post_new'),
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
@@ -22,6 +22,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')), # new
     path('createuserview/', CreateUserView.as_view(), name='createuserview'),
     path('test/', views.test, name= 'test'),
+    #path('postss/', SearchList.as_view(), name='searchview'),
+
     
 
 

@@ -7,7 +7,9 @@ from .forms import PostForm,UserForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.db import models
-
+from django.db.models import Q
+from functools import reduce
+import operator
 
 # from django.contrib.auth import authenticate, login, logout
 # from django.http import HttpResponseRedirect, HttpResponse
@@ -16,6 +18,8 @@ from django.db import models
 from django.views.generic import CreateView, UpdateView,FormView, DeleteView, ListView, DetailView
 
 from django.contrib.auth.models import User
+
+
 
 
 def post_new(request):
@@ -34,9 +38,49 @@ def post_new(request):
 #     form = PostForm()
 #     return render(request, 'blog/post_edit.html', {'form': form})
 
-def post_list(request):
-     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-     return render(request, 'blog/post_list.html', {'posts': posts})
+search_term=''
+context= {}
+
+
+
+    #search bar deneme
+class PostList(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name= "posts"
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        
+    # def post_list(self):
+    #     posts = super(PostList, self).get_queryset()
+    #     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    #     context= {"posts": posts}
+    #     return context
+
+    def get_queryset(self):
+        queryset = []
+        #posts = self.model.objects.all()
+        posts = super(PostList, self).get_queryset()
+        search_term = self.request.GET.get('q')
+        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        if search_term:
+            search_term_list = str(search_term).split()
+            for q in search_term_list:
+                posts = Post.objects.filter(
+                    Q(title__icontains=q)  | 
+                    Q(text__icontains=q) 
+                ).distinct('pk')
+
+        return posts
+        # if 'search' in request.GET:
+        #     search_term =  request.GET['search']
+        #     posts = Post.objects.filter(Q(text__icontains=search_term)) 
+        # return posts
+
+    # def get(self,request, *arg,**args):
+    #     context = self.get_context_data(**kwargs)
+    #     context['search_term'] = request.GET.get('search','')
+    #     return render(request.self.template_name,context)
+
 
 def post_detail(request, pk):
      post = get_object_or_404(Post, pk=pk)
