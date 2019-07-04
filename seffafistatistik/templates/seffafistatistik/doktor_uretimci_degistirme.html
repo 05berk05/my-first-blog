@@ -1,0 +1,31 @@
+{% extends 'seffafistatistik/home.html' %}
+
+
+{% block content %}
+
+{% for d in array %}
+
+        {% if d.anatec %}
+            <p>{{d.anatec.get_full_name()}}</p>
+        {% endif %}
+        {% for team in miy_producer %}
+            
+            {% if team[0] == d.miy %}
+                <p>{{team[0]}}</p>
+                
+
+                {% if producer != d.protec %}    
+                    <p> -------- </p>
+                    
+                    
+                    <p>{{d.account.get_full_name()}}</p>
+                    <p>{{d.protec.get_full_name()}}</p>
+                    {% endif %}
+                {% endif %}
+
+            
+        <p>adet</p> 
+        <p>{{array2|length}}</p>
+    {% endfor %}
+
+{%endblock}

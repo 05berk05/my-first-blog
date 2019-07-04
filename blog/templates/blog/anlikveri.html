@@ -1,0 +1,122 @@
+{% extends 'blog/post_list.html' %}
+<!DOCTYPE html>
+<html lang="tr-TR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajax Anlik Veri Çekme</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    </head>
+<body>
+{% block content %}
+    <form class= "form-inline my-5 my-lg-5">
+            <nav>
+                <div class="nav-wrapper">
+                <form method="GET" action="">
+                    <div class="input-field">
+                    <input 
+                    class= "form-control mr-sn-2"
+                    id="id_q" 
+                    type="search" required
+                    placeholder="Search..."
+                    aria-label="Search"
+                    name="q"
+                    value="{{request.GET.search}}">
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                    </div>
+                </form>
+                </div>
+            </nav>
+    </form>
+    {% if user.is_authenticated %}
+    <a style="margin-left:1030px; margin-top: -25px" href="{% url 'post_new' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> 
+    {% endif %}    
+   
+        <div class="post">
+            <div class="date">
+                    <p>cannot be published</p>
+            </div>
+        </div>
+        <h2><a href="">{{"posts"}}</a></h2>
+    <!-- {% if posts %}
+        {% for post in posts %} -->
+            <h3>Ajax Anlik Veri Çekme</h3>
+            
+        <p>
+            <b>Değer : </b><span id="anlik">Bekleniyor...</span>
+    
+        
+        </p>
+
+        <script>
+            var updatePage = function( cevap ) {
+            $("#anlik").html(cevap.hey);
+            };
+
+            var ajaxOptions = {
+                type: "post",
+                url: "/anlik/",
+                data: {
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                dataType: "json",
+                success: function(cevap){
+                // if (cevap.hey)
+                //     $.titbr= hey.split("title")
+                // for (var k = 0; k < titbr.length; k++)  {  
+                //     $.texttitbr=titbr[k].split("text")
+                //         for (var i = 0; i < linkList.length; i++)  {
+                    $("#anlik").html(cevap.hey); 
+                            
+                }
+            };
+
+                    $(function(){
+                    
+                        $.ajaxLoad = function(){
+                        // posts=list(Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date'))    
+                        // serializers.serialize("json", posts),
+                        //location.reload(false);
+                    
+                        $.ajax({
+                            type: "post",
+                            url: "/anlik/",
+                            data: {
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                                },
+                            dataType: "json",
+                            success: function(cevap){
+                            //      if (cevap.hey)
+                            //      $.titbr= hey.split("title")
+                            //  for (var k = 0; k < titbr.length; k++)  {  
+                            //      $.texttitbr=titbr[k].split("text")
+                            //          for (var i = 0; i < linkList.length; i++)  {
+                                $("#anlik").html(cevap.hey.split("text")[1].split(",")[0]); 
+                            
+                                    }
+                                }
+                                )
+                            };
+
+            
+                //anlık dediğimiz şey viewsdeki 'anlık'la eşleşiyor cevap yerine ne yazdığımız önemli değil o gelen şey demek, gelen şeydeki anlık datasını çağırıyoruz, tabi jsona çevirdik ama json olunca senin pzt yapman gereken bunları title, vs olarak ayrı ayrı almak sonra css yaparsın
+            
+            // her 5sn'de bir veriyi çek
+            setInterval('$.ajaxLoad()', 1000);
+            
+            });
+            </script>
+        <!-- i=i+1;    
+            {% endfor %}
+        {% endif %} -->
+    {% endblock content %}}
+
+
+ 
+</body>
+ 
+ 
+
+ 
+ 
+</html>

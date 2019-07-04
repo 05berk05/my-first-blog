@@ -1,0 +1,17 @@
+{% extends 'seffafistatistik/home.html' %}
+
+{% block content %}
+
+{% for i in x %}
+    {% if i.doctor.monthly_stats.has_key(u'10-2017') %}
+    {% else %}
+        <p> {{i.doctor}} </p>
+{% endfor %}
+<p>{{toplam_x}}</p>
+<p>{{toplam_y}}</p>
+<p>{{toplam_y_onay}}</p>
+<p>{{toplam_y_set|length}}</p>
+<p>-----------</p>
+
+
+{% endblock %}

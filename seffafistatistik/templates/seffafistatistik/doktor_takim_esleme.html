@@ -1,0 +1,27 @@
+{% extends 'seffafistatistik/home.html' %}
+
+{% block content %}
+
+{% for doctor in Druid_doctors %}
+
+    <p>{{counter}}</p>
+
+    {% endfor %}
+
+{% for doctor in Shaman_doctors %}
+    
+    <p>{{counter}}</p>
+    
+    {% endfor %}
+{% for doctor in Mage_doctors %}
+    
+    <p>{{counter}}</p>
+    
+    {% endfor %}
+{% for doctor in Paladin_doctors %}
+    
+    <p>{{counter}}</p>
+    
+    {% endfor %}
+
+{%endblock}

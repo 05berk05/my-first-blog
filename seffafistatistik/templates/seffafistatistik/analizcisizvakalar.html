@@ -1,0 +1,10 @@
+{% extends 'seffafistatistik/home.html' %}
+
+{% block content %}
+
+    <p>cases: {{cases|length}}</p>
+    {% for case in cases%}
+        <p>{{case}}</p>
+        {% endfor %}
+
+{%endblock}

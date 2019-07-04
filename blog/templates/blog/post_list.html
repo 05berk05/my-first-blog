@@ -25,6 +25,9 @@
 {% if user.is_authenticated %}
 <a style="margin-left:1030px; margin-top: -25px" href="{% url 'post_new' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> 
 {% endif %}    
+<h3>Ajax Anlik Veri Çekme</h3>
+    <p>
+        <b>Değer : </b><span id="anlik">Bekleniyor...</span>
 {% if posts %}
     {% for post in posts %}
             <div class="post">
@@ -32,8 +35,10 @@
                     <p>published: {{ post.published_date }}</p>
                     <!-- <h2><a href="">{{ post.title }}</a></h2> -->
                 </div>
+                <span id="posts">
                 <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-                <p style="text-align: justify">{{ post.text|linebreaksbr }}</p>
+                <p style="text-align: justify" >{{ post.text|linebreaksbr }}</p>
+                </span>
             </div>
         {% endfor %}
 {% else %} 
@@ -43,7 +48,34 @@
             </div>
         </div>
 {% endif %}
-{% endblock %}
-<script type="text/javascript">
-    document.getElementById("id_q").value= {{search_term}}
+ 
+</p>
+
+<script>
+        $(function(){
+            
+            $.ajaxLoad = function(){
+                //location.reload(false);
+                $.ajax({
+                type: "post",
+                url: "/anlik/",
+                data: {
+                csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                dataType: "json",
+                success: function(cevap){
+                    if (cevap.anlik){
+                        $("#anlik").html(cevap.anlik);
+                        }
+                    }
+            });
+        }
+     
+     // her 5sn'de bir veriyi çek
+     setInterval('$.ajaxLoad()', 1000);
+     
+    });
 </script>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>

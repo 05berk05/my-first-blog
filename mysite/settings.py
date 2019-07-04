@@ -29,6 +29,7 @@ SECRET_KEY = 'w-7erekm543*#39#0lcz^e#@t76-m4g3x+u3ki@!#n2kdg#qe9'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+AUTH_USER_MODEL = "seffafistatistik.Account" 
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'blog.apps.BlogConfig', #new
     'blog',
+    "seffafistatistik",
     #'dappx'#3
 ]
 

@@ -10,6 +10,11 @@ from django.db import models
 from django.db.models import Q
 from functools import reduce
 import operator
+import json
+from django.http import HttpResponse, JsonResponse
+import random
+from django.core import serializers
+
 
 # from django.contrib.auth import authenticate, login, logout
 # from django.http import HttpResponseRedirect, HttpResponse
@@ -18,8 +23,31 @@ import operator
 from django.views.generic import CreateView, UpdateView,FormView, DeleteView, ListView, DetailView
 
 from django.contrib.auth.models import User
+from django import template
+
+register = template.Library()
+
+@register.filter()
+def range(min=5):
+    return range(min)
 
 
+#reload deneme alinin kodundan
+def anlikveri(request):
+    #post = get_object_or_404(Post, pk=pk)
+#Ajax istediği gelirse kontrol et
+    if request.is_ajax():
+        #print(type(data))
+        posts=list(Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date'))
+        posts = serializers.serialize("json", posts)
+        
+        # 
+        return HttpResponse(
+        json.dumps({
+            'hey': posts
+            })
+        )
+    return render(request,'blog/anlikveri.html',locals())
 
 
 def post_new(request):
@@ -50,11 +78,34 @@ class PostList(ListView):
     context_object_name= "posts"
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
         
+    def anlikveri(self, request):
+#Ajax istediği gelirse kontrol et
+        if request.is_ajax():
+            #print(type(data))
+            return HttpResponse(
+            json.dumps({
+        #istek gelirse, rastgele sayı yolla
+                'anlik': random.randint(1, 100)
+            })
+        )
+        return render(request,'blog/post_list.html',locals())
     # def post_list(self):
     #     posts = super(PostList, self).get_queryset()
     #     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
     #     context= {"posts": posts}
     #     return context
+    def post_reload(self,request):
+        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    # ajax istediği gelirse kontrol et
+        if request.is_ajax():
+            return HttpResponse(
+        #ajax istediği gelirse, yeni postları gönder
+            json.dumps({
+            'post_list': posts
+            })
+        )
+#Json çıktıyı verdikten sonra, anasayfa gönder
+        return render(request,'post_list.html',locals())
 
     def get_queryset(self):
         queryset = []

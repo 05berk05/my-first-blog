@@ -22,6 +22,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')), # new
     path('createuserview/', CreateUserView.as_view(), name='createuserview'),
     path('test/', views.test, name= 'test'),
+    path('anlik/',views.anlikveri,name='anlikveri')
     #path('postss/', SearchList.as_view(), name='searchview'),
 
     

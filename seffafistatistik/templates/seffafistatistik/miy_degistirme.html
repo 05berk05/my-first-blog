@@ -1,0 +1,15 @@
+{% extends 'seffafistatistik/home.html' %}
+
+{% block content %}  
+
+<p>nuri: {{nuri}}</p>>
+<p>buse: {{buse}}</p>>
+
+{% for d in doctors %}
+    {% if d.account.get_full_name() in doctors_list %}
+        d.miy=buse
+        d.save()
+        <p>{{d.account..get_full_name()}} {{d.miy}}</p>
+<p>adet {{doctors|length}} </p>
+<h2><a href="{% url 'miy_detay' pk=post.pk %}">{{ MIY. }}</a></h2>
+{% endblock %}

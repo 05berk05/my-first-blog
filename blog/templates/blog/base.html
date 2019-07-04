@@ -2,6 +2,7 @@
 {% load static %}
 <html>
     <head>
+            <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
         <!-- Compiled and minified CSS -->
     <!-- <meta http-equiv="refresh" content="10"> -->
     <meta charset="utf-8">
@@ -43,18 +44,45 @@
     </head>
 <div id="test"></div>
 <script language="javascript" type="text/javascript">
-    var timeout = setTimeout(reloadChat, 5000); 
+$("#loadbasic").click(function(){   $("#result").html(post_list).load(loadUrl); 
+    });
+    var timeout = setTimeout(reload, 5000); 
 
     function loadlink(){
-        $('#links').load('test.php',function () {
+        $('#links').load('post_list',function () {
         $(this).unwrap();
         });
     }
 
     loadlink(); // This will run on page load
     setInterval(function(){
-    loadlink() // this will run after every 5 seconds
+        location.reload(true);
+        loadlink() // this will run after every 5 seconds
     }, 5000);
+
+    (function worker() {
+  $.ajax({    url: 'blog/post_list.html',
+    success: function(data) {
+      $('.result').html(data);
+    },    complete: function() {
+   // Schedule the next request when the current one's complete       
+   setTimeout(worker, 5000);
+  }
+  });
+})();
+        </script>
+
+        <script>
+            setInterval(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "post_list.html",  // URL to your view that serves new info
+                    data: {'reload': reload}
+                })
+                .always(function(response) {
+                    $('#_appendHere').append(response);
+                });
+            }, 10000)
         </script>
 
     <body>
@@ -91,4 +119,6 @@
             <script src="{% static 'js/app.js' %}"></script>
             {% block javascript %}{% endblock %}
     </body>
+
+
 </html>
