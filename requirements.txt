@@ -5,7 +5,7 @@ cffi==1.12.3
 chardet==3.0.4
 closure==20190417
 colorama==0.4.1
-cryptography==2.7
+cryptography==3.2
 dj-database-url==0.4.2
 Django==2.0.13
 gunicorn==19.9.0
